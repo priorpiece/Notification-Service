@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package reservationfcm;
+
+service ReservationService {
+  rpc GetUsersByContentScheduleId (ContentScheduleRequest) returns (UserList);
+}
+
+message ContentScheduleRequest {
+  string content_schedule_id = 1;
+}
+
+message UserList {
+  repeated string user_ids = 1;
+}

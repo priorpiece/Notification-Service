@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+
+package notification;
+
+// gRPC 서비스 정의
+service NotificationService {
+  rpc SendNotification (NotificationRequest) returns (NotificationResponse);
+}
+
+// 요청 메시지
+message NotificationRequest {
+  string user_id = 1;
+  string title = 2;
+  string body = 3;
+}
+
+// 응답 메시지
+message NotificationResponse {
+  bool success = 1;
+}

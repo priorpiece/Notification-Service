@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package userfcm;
+
+service UserService {
+  rpc GetFcmToken (UserRequest) returns (FcmTokenResponse);
+}
+
+message UserRequest {
+  string user_id = 1;
+}
+
+message FcmTokenResponse {
+  string fcm_token = 1;
+}

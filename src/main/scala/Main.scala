@@ -9,6 +9,7 @@ import config.{FirebaseConfig, Server}
 import infra.out.{GrpcReservationClient, GrpcScheduleClient, GrpcUserClient}
 import scheduler.NotificationScheduler
 
+import java.time.ZoneId
 
 object Main {
   def main(args: Array[String]): Unit = {
@@ -44,7 +45,7 @@ object Main {
     kafkaStreams.startStream()
 
     // Scheduler 실행 (매일 4AM 실행)
-    new NotificationScheduler(notificationService)
+    new NotificationScheduler(notificationService,ZoneId.of("Asia/Seoul"))
 
     println("Notification Service Started!")
 

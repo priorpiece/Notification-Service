@@ -54,7 +54,18 @@ class NotificationService(schedulePort: SchedulePort, reservationPort: Reservati
     }
     // 모든 Future 작업이 완료될 때까지 기다림
     Future.sequence(notificationFutures).map(_ => ())
-
+//    val testFcmToken = "" // 임의의 FCM 토큰 설정
+//    val futureResponse: Future[String] = fcmPort.sendPushNotification(
+//      token = testFcmToken,
+//      title = "테스트 알림",
+//      body = "이것은 테스트 메시지입니다."
+//    )
+//    futureResponse.map { _ =>
+//      println("FCM 알림 전송 성공")
+//    }.recover {
+//      case exception =>
+//        println(s"FCM 알림 전송 실패: ${exception.getMessage}")
+//    }.map(_ => ())
   }
 
   override def registScheduleNotification(scheduleId: String, scheduleTime: Long): Unit = {
@@ -63,9 +74,9 @@ class NotificationService(schedulePort: SchedulePort, reservationPort: Reservati
 
     if (reminderTime > now) {
       println(s"Kafka로 5분 전 알림 메시지 전송: $scheduleId")
-      kafkaProducerPort.sendNotification(scheduleId, scheduleTime) // ✅ Kafka Producer 호출
+      kafkaProducerPort.sendNotification(scheduleId, scheduleTime) //  Kafka Producer 호출
     } else {
-      println(s"⏳ 이미 지난 컨텐츠 스케줄은 무시됨: $scheduleId")
+      println(s"이미 지난 컨텐츠 스케줄은 무시됨: $scheduleId")
     }
   }
 }
